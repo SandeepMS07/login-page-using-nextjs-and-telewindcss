@@ -4,7 +4,6 @@ import Link from "next/link";
 import { FaRegEnvelope } from "react-icons/fa";
 import { MdLockOutline } from "react-icons/md";
 import { useState } from "react";
-import { Router } from "next/router";
 
 const LoginPage = () => {
   const [formvalues, setFormvalues] = useState({
@@ -15,24 +14,29 @@ const LoginPage = () => {
   const [error, seterror] = useState({});
   const [issubmit, setIssubmit] = useState(false);
 
+  //!  
   const handleClick = (e) => {
-    // e.preventDefault();
-    seterror(valid(formvalues));
-
-    setIssubmit(true);
+      // if (!error) {
+      // }
+ 
   };
+ 
+  //! updating values 
   const updateData = (e) => {
     let { name, value } = e.target;
     setFormvalues({ ...formvalues, [name]: value });
     seterror(valid(formvalues));
   };
 
+  //! validation function 
   let valid = (values) => {
     let errors = {};
 
+    //! email
     if (!values.email) {
-      errors.email = "*Email required";
+      errors.email = "*Username required";
     }
+    //! password 
     if (!values.password) {
       errors.password = "*password Required";
     }
@@ -51,19 +55,19 @@ const LoginPage = () => {
 
               <div className=" border-2 w-8 md:w-12 bg-green-600 border-green-600 inline-block mb-2"></div>
 
-              <form action="" className="flex flex-col items-center mb-2">
+              <div className="flex flex-col items-center mb-2">
                 <div className="bg-gray-100 md:w-64 p-1 md:p-2 flex items-center mb-3">
                   <FaRegEnvelope className="text-gray-400 m-2" />
                   <input
                     type="email"
                     name="email"
-                    placeholder="Email"
+                    placeholder="Username"
                     className="bg-gray-100 outline-none text-sm flex-1"
                     onChange={updateData}
+                    required
                   />
                 </div>
                 <p className="text-xs mb-2 text-red-600 ">{error.email}</p>
-
                 <div className="bg-gray-100  md:w-64 p-1 md:p-2 flex items-center mb-3">
                   <MdLockOutline className="text-gray-400 m-2" />
                   <input
@@ -72,10 +76,11 @@ const LoginPage = () => {
                     placeholder="Password"
                     className="bg-gray-100 outline-none text-sm flex-1"
                     onChange={updateData}
+                    required
                   />
                 </div>
                 <p className="text-xs mb-2 text-red-600 ">{error.password}</p>
-                <Link href="/Dashboard/" passHref>
+                <Link href="/Dashboard" passHref>
                   <button
                     type="submit"
                     className="border-2 border-green-500 text-green-500 rounded-full px-8 md:px-12 py-1 md:py-2 inline-block font-semibold hover:bg-green-500 hover:text-white"
@@ -84,7 +89,7 @@ const LoginPage = () => {
                     Sign in
                   </button>
                 </Link>
-              </form>
+              </div>
             </div>
           </div>
         </div>
