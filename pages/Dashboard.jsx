@@ -6,15 +6,16 @@ const Dashboard = () => {
   return (
     <>
       <div className="container">
-        <div className="row">
-          <div className="flex">
-            <div className="w-3/12">
+        <div className="row-auto">
+          <div className="grid grid-cols-2">
+            <div >
               <Sidebar />
             </div>
-            <div className="w-9/12">
+            <div>
               <InvoicePage />
             </div>
           </div>
+          {/* <InvoicePage /> */}
         </div>
       </div>
     </>
